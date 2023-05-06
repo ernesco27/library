@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Library</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/b0542e0689.js" crossorigin="anonymous"></script>
+    <script src="app.js" defer></script>
+</head>
+<body>
+    <div class="header">
+        <p>Library Collection</p>
+    </div>
+    <button class="newbook-btn">
+        <i class="fa-solid fa-circle-plus"></i>
+        <p>New Book</p>
+    </button>
+    <div class="card-container">
+        <div class="card">
+            <div class="book-image">
+                <img src="imageFolder/A.jpg" alt="photo" width="350" height="200" >
+            </div>
+            <p class="bk-title">Pride and Prejudice</p>
+            <p class="bk-author">Jane Austen</p>
+            <div class="icons-div">
+                <i class="fa-solid fa-trash"></i>
+                <i class="fa-regular fa-heart"></i>
+                <div class="read-status">Unread</div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="book-image">
+                <img src="imageFolder/B.jpg" alt="photo" width="350" height="200">
+            </div>
+            <p class="bk-title">The Twilight Saga</p>
+            <p class="bk-author">Stephanie Meyer</p>
+            <div class="icons-div">
+                <i class="fa-solid fa-trash"></i>
+                <i class="fa-regular fa-heart"></i>
+                <div class="read-status">Unread</div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="book-image">
+                <img src="imageFolder/C.jpg" alt="photo" width="350" height="200">
+            </div>
+            <p class="bk-title">The Note Book</p>
+            <p class="bk-author">Nicholas Sparks</p>
+            <div class="icons-div">
+                <i class="fa-solid fa-trash"></i>
+                <i class="fa-regular fa-heart"></i>
+                <div class="read-status">Unread</div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="book-image">
+                <img src="imageFolder/D.jpg" alt="photo" width="350" height="200">
+            </div>
+            <p class="bk-title">Romeo and Juliet</p>
+            <p class="bk-author">William Shakespeare</p>
+            <div class="icons-div">
+                <i class="fa-solid fa-trash"></i>
+                <i class="fa-regular fa-heart"></i>
+                <div class="read-status">Unread</div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="close-icon"><i class="fa-solid fa-circle-xmark"></i></div>
+        <div class="form">
+            <h3>Enter Book Details</h3>
+            <label for="title">Book Title:</label>
+            <input type="text" id="title" name="title" placeholder="Romeo and Juliet">
+            <br>
+            <label for="author">Book Author:</label>
+            <input type="text" id="author" name="author" placeholder="Shakespeare">
+            <br>
+            <label for="pages">Total Pages:</label>
+            <input type="text" id="pages" name="pages" placeholder="250">
+            <br>
+            <button class="add-btn"><span><i class="fa-solid fa-circle-plus"></i></span> ADD</button>
+        </div> 
+    </div>
+</body>
+</html>
