@@ -7,10 +7,6 @@ const bookAuthor = document.querySelector('#author');
 const bookPages = document.querySelector('#pages');
 const closeIcon = document.querySelector('.close-icon');
 const bookCard = document.querySelectorAll('.card');
-//const bookStatus = document.querySelector('')
-
-
-
 
 
 
@@ -22,11 +18,17 @@ function Book(title,author){
     this.author = author
 }
 
-function BookInfo(title, author,pages,status){
+function BookInfo(title,author,pages,read){
     Book.call(this,title,author);
     this.pages = pages,
-    this.status = status
+    this.read = read,
+    this.info = function(){
+        return this.read = 'Read';
+    }
+ 
 }
+
+
 
 Object.setPrototypeOf(BookInfo.prototype,Book.prototype);  //this sets BookInfo object prototype to match Book prototype
 
@@ -34,11 +36,10 @@ Object.setPrototypeOf(BookInfo.prototype,Book.prototype);  //this sets BookInfo 
 //this function adds the new book to the myLibrary array
 
 function addBookToLibrary(){
-    let book = new Book(bookTitle.value, bookAuthor.value);
+    let book = new BookInfo(bookTitle.value, bookAuthor.value, bookPages.value);
     myLibrary.push(book);
     displayBook();
     closeModal();
-
 }
 
 
@@ -49,14 +50,21 @@ function displayBook(){
     
     //created a loop that iterates through the myLibrary array and displays the card for each book
     for(let i = 0; i < myLibrary.length; i++){ 
+        let book = myLibrary[i];
         let card = document.createElement('div');
         card.classList.add('card');
+        //created title and author elements
         let title = document.createElement('p');
         let bk_author = document.createElement('p');
         bk_author.classList.add('bk-author');
         title.classList.add('bk-title');
-        title.textContent = myLibrary[i].title;
-        bk_author.textContent = myLibrary[i].author;
+        title.textContent = book.title;
+        bk_author.textContent = book.author;
+
+        //created elements for pages
+        let pages = document.createElement('p');
+        pages.classList.add('bk-pages');
+        pages.textContent = `Pages: ${book.pages}`;
 
         let coverDiv = document.createElement('div');
         coverDiv.classList.add('book-image');
@@ -81,15 +89,17 @@ function displayBook(){
         let iconHeart = document.createElement('i');
         iconHeart.innerHTML = '<i class="fa-regular fa-heart"></i>';
 
+        //this creates the element for the read status of each book with a read status button that returns 'Read' when clicked
         let readStatus = document.createElement('div');
         readStatus.classList.add('read-status');
         readStatus.textContent = 'Unread';
-
         readStatus.addEventListener('click', () =>{
-            this.status = 'Read'
-           
+            book.info();
             readStatus.textContent = 'Read';
             readStatus.style.backgroundColor = 'green';
+           
+            console.log(book.info());
+            
         })
 
     
@@ -97,6 +107,7 @@ function displayBook(){
         card.appendChild(coverDiv);
         card.appendChild(title);
         card.appendChild(bk_author);
+        card.appendChild(pages);
         icons_ctn.appendChild(iconDel);
         icons_ctn.appendChild(iconHeart);
         icons_ctn.appendChild(readStatus);
@@ -112,6 +123,10 @@ function displayBook(){
 //this function is to close the new book modal
 function closeModal(){
     form_modal.style.display = 'none';
+    bookTitle.value = '';
+    bookAuthor.value = '';
+    bookPages.value = '';
+
 }
 
 //added event listeners to the various buttons
@@ -133,15 +148,3 @@ function selectImage(){
     let randomIndex = Math.floor((Math.random() * images.length));
     return images[randomIndex];
 }
-
-//function to delete book card
-
-
-
-
-
-
-
-
-//function to disable book submission button
-

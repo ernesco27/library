@@ -43,8 +43,12 @@ body{
     border-radius: 12px;
     box-shadow: 2px 3px 6px rgba(0,0,0,0.2);
     max-width: 350px;
+}
 
-
+.card:hover{
+    transform: scale(1.05);
+    transition: transform 0.3s;
+    cursor: pointer;
 }
 
 .card > div{
@@ -94,6 +98,13 @@ body{
 
 .bk-author{
     font-style: italic;
+}
+
+.bk-pages{
+    font-size: 1rem;
+    font-style: italic;
+    color: var(---secondary-color);
+    
 }
 
 .book-image > img{
