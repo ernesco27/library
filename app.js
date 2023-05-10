@@ -7,6 +7,23 @@ const bookAuthor = document.querySelector('#author');
 const bookPages = document.querySelector('#pages');
 const closeIcon = document.querySelector('.close-icon');
 const bookCard = document.querySelectorAll('.card');
+//const bookStatus = getSelectedOption();
+
+
+function getSelectedOption(){
+    const read = document.querySelector('#read');
+    const unread = document.querySelector('#unread');
+
+    if(read.checked){
+        return read.value
+    }else if(unread.checked){
+        return unread.value
+    }else{
+        alert('Select an Option')
+        return
+    }
+
+}
 
 
 
@@ -18,14 +35,11 @@ function Book(title,author){
     this.author = author
 }
 
-function BookInfo(title,author,pages,read){
+function BookInfo(title,author,pages,bookStatus,coverImage){
     Book.call(this,title,author);
     this.pages = pages,
-    this.read = read,
-    this.info = function(){
-        return this.read = 'Read';
-    }
- 
+    this.bookStatus = bookStatus,
+    this.coverImage = coverImage
 }
 
 
@@ -36,7 +50,10 @@ Object.setPrototypeOf(BookInfo.prototype,Book.prototype);  //this sets BookInfo 
 //this function adds the new book to the myLibrary array
 
 function addBookToLibrary(){
-    let book = new BookInfo(bookTitle.value, bookAuthor.value, bookPages.value);
+    let bookStatus = getSelectedOption();
+    let coverImage = selectImage();
+    let book = new BookInfo(bookTitle.value, bookAuthor.value, bookPages.value,bookStatus,coverImage);
+    
     myLibrary.push(book);
     displayBook();
     closeModal();
@@ -47,6 +64,8 @@ function addBookToLibrary(){
 //this function is to display the books in the array to the grid
 function displayBook(){
     card_container.textContent = '';
+    let bookStatus = getSelectedOption();
+    let coverImage = selectImage();
     
     //created a loop that iterates through the myLibrary array and displays the card for each book
     for(let i = 0; i < myLibrary.length; i++){ 
@@ -70,7 +89,7 @@ function displayBook(){
         coverDiv.classList.add('book-image');
 
         let coverImage = document.createElement('img');
-        coverImage.src = selectImage();
+        coverImage.src = book.coverImage;
 
         let icons_ctn = document.createElement('div');
         icons_ctn.classList.add('icons-div');
@@ -91,16 +110,24 @@ function displayBook(){
 
         //this creates the element for the read status of each book with a read status button that returns 'Read' when clicked
         let readStatus = document.createElement('div');
-        readStatus.classList.add('read-status');
-        readStatus.textContent = 'Unread';
+        //readStatus.classList.add('read-status');
+    
+        if(book.bookStatus === 'read'){
+            readStatus.textContent = book.bookStatus;
+            readStatus.classList.add('read-status2');
+        }else if(book.bookStatus === 'unread'){
+            readStatus.textContent = book.bookStatus;
+            readStatus.classList.add('read-status')
+        }
+
+       //this creates the element for the edit status
+
+        console.log(bookStatus);
+        
         readStatus.addEventListener('click', () =>{
-            book.info();
-            readStatus.textContent = 'Read';
-            readStatus.style.backgroundColor = 'green';
-           
-            console.log(book.info());
             
         })
+    
 
     
         coverDiv.appendChild(coverImage);
