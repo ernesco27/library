@@ -11,6 +11,7 @@
 </head>
 <body>
     <div class="header">
+        <div><i class="fa-solid fa-book-open-reader"></i></div>
         <p>Library Collection</p>
     </div>
     <button class="newbook-btn">
@@ -28,7 +29,7 @@
             <div class="icons-div">
                 <i class="fa-solid fa-trash"></i>
                 <i class="fa-regular fa-heart"></i>
-                <div class="read-status">Unread</div>
+                <button class="read-status">Unread</button>
             </div>
         </div>
         <div class="card">
@@ -41,7 +42,7 @@
             <div class="icons-div">
                 <i class="fa-solid fa-trash"></i>
                 <i class="fa-regular fa-heart"></i>
-                <div class="read-status">Unread</div>
+                <button class="read-status">Unread</button>
             </div>
         </div>
         <div class="card">
@@ -54,7 +55,7 @@
             <div class="icons-div">
                 <i class="fa-solid fa-trash"></i>
                 <i class="fa-regular fa-heart"></i>
-                <div class="read-status">Unread</div>
+                <button class="read-status">Unread</button>
             </div>
         </div>
         <div class="card">
@@ -67,22 +68,22 @@
             <div class="icons-div">
                 <i class="fa-solid fa-trash"></i>
                 <i class="fa-regular fa-heart"></i>
-                <div class="read-status">Unread</div>
+                <button class="read-status">Unread</button>
             </div>
         </div>
     </div>
-    <div class="form-group">
+    <form class="form-group">
         <div class="close-icon"><i class="fa-solid fa-circle-xmark"></i></div>
         <div class="form">
             <h3>Enter Book Details</h3>
             <label for="title">Book Title:</label>
-            <input type="text" id="title" name="title" placeholder="Romeo and Juliet">
+            <input type="text" id="title" name="title" placeholder="Romeo and Juliet" required>
             <br>
             <label for="author">Book Author:</label>
-            <input type="text" id="author" name="author" placeholder="Shakespeare">
+            <input type="text" id="author" name="author" placeholder="Shakespeare" required>
             <br>
             <label for="pages">Total Pages:</label>
-            <input type="text" id="pages" name="pages" placeholder="250">
+            <input type="text" id="pages" name="pages" placeholder="250" required>
             <br>
             <h5>Have You Read The Book?</h5>
             <div>
@@ -93,10 +94,9 @@
                 <input type="radio" id="unread" name="status" value="unread">
                 <label for="status">Unread</label>
             </div>
-           
-
-            <button class="add-btn"><span><i class="fa-solid fa-circle-plus"></i></span> ADD</button>
+            <button type="submit" class="add-btn"><span><i class="fa-solid fa-circle-plus"></i></span>ADD</button>
         </div> 
-    </div>
+        <div class="error-message"></div>
+    </form>
 </body>
 </html>

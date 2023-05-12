@@ -7,7 +7,8 @@ const bookAuthor = document.querySelector('#author');
 const bookPages = document.querySelector('#pages');
 const closeIcon = document.querySelector('.close-icon');
 const bookCard = document.querySelectorAll('.card');
-//const bookStatus = getSelectedOption();
+const inputs = document.querySelectorAll('input');
+
 
 
 function getSelectedOption(){
@@ -18,11 +19,7 @@ function getSelectedOption(){
         return read.value
     }else if(unread.checked){
         return unread.value
-    }else{
-        alert('Select an Option')
-        return
     }
-
 }
 
 
@@ -49,11 +46,14 @@ Object.setPrototypeOf(BookInfo.prototype,Book.prototype);  //this sets BookInfo 
 
 //this function adds the new book to the myLibrary array
 
+
+
 function addBookToLibrary(){
     let bookStatus = getSelectedOption();
     let coverImage = selectImage();
     let book = new BookInfo(bookTitle.value, bookAuthor.value, bookPages.value,bookStatus,coverImage);
-    
+
+
     myLibrary.push(book);
     displayBook();
     closeModal();
@@ -108,28 +108,38 @@ function displayBook(){
         let iconHeart = document.createElement('i');
         iconHeart.innerHTML = '<i class="fa-regular fa-heart"></i>';
 
-        //this creates the element for the read status of each book with a read status button that returns 'Read' when clicked
-        let readStatus = document.createElement('div');
-        //readStatus.classList.add('read-status');
-    
-        if(book.bookStatus === 'read'){
-            readStatus.textContent = book.bookStatus;
-            readStatus.classList.add('read-status2');
-        }else if(book.bookStatus === 'unread'){
-            readStatus.textContent = book.bookStatus;
-            readStatus.classList.add('read-status')
+        //this creates the element for the read status of each book with a read status button that returns the book status when clicked
+        let readStatus = document.createElement('button');
+       
+        function checkReadStatus(){
+            if(book.bookStatus === 'read'){
+                readStatus.textContent = book.bookStatus;
+                readStatus.classList.add('read-status2');
+            }else if(book.bookStatus === 'unread'){
+                readStatus.textContent = book.bookStatus;
+                readStatus.classList.add('read-status')
+            }
         }
 
-       //this creates the element for the edit status
+        checkReadStatus();
 
-        console.log(bookStatus);
-        
+
+    
+       //below adds an event listener to the readstatus button
+
         readStatus.addEventListener('click', () =>{
-            
+            changeBookStatus(i);
+            if(book.bookStatus === 'read'){
+                 readStatus.textContent = book.bookStatus;
+                 readStatus.style.backgroundColor = 'green'
+            }else{
+                readStatus.textContent = book.bookStatus;
+                readStatus.style.backgroundColor = 'red'
+            }
         })
     
 
-    
+    //this adds the various DOM elements to the DOM
         coverDiv.appendChild(coverImage);
         card.appendChild(coverDiv);
         card.appendChild(title);
@@ -140,10 +150,8 @@ function displayBook(){
         icons_ctn.appendChild(readStatus);
         card.appendChild(icons_ctn);
         card_container.appendChild(card);
-    
     } 
 }
-
 
 
 
@@ -157,7 +165,7 @@ function closeModal(){
 }
 
 //added event listeners to the various buttons
-add_btn.addEventListener('click',addBookToLibrary);
+add_btn.addEventListener('click', addBookToLibrary);
 closeIcon.addEventListener('click', closeModal);
 
 //this button displays the new book modal
@@ -175,3 +183,16 @@ function selectImage(){
     let randomIndex = Math.floor((Math.random() * images.length));
     return images[randomIndex];
 }
+
+//function to change the book status when called
+
+function changeBookStatus(book){
+    if(myLibrary[book].bookStatus === 'read'){
+        myLibrary[book].bookStatus = 'unread';
+    }else{
+        myLibrary[book].bookStatus = 'read';
+    }
+
+}
+
+
