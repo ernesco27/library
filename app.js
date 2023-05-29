@@ -27,21 +27,32 @@ function getSelectedOption(){
 let myLibrary = [];
 
 
-function Book(title,author){
-    this.title = title,
-    this.author = author
+// function Book(title,author){
+//     this.title = title,
+//     this.author = author
+// }
+
+// function BookInfo(title,author,pages,bookStatus,coverImage){
+//     Book.call(this,title,author);
+//     this.pages = pages,
+//     this.bookStatus = bookStatus,
+//     this.coverImage = coverImage
+// }
+
+
+
+// Object.setPrototypeOf(BookInfo.prototype,Book.prototype);  //this sets BookInfo object prototype to match Book prototype
+
+
+class Book{
+    constructor(title,author,pages,bookStatus,coverImage){
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.bookStatus = bookStatus;
+        this.coverImage = coverImage;
+    }
 }
-
-function BookInfo(title,author,pages,bookStatus,coverImage){
-    Book.call(this,title,author);
-    this.pages = pages,
-    this.bookStatus = bookStatus,
-    this.coverImage = coverImage
-}
-
-
-
-Object.setPrototypeOf(BookInfo.prototype,Book.prototype);  //this sets BookInfo object prototype to match Book prototype
 
 
 //this function adds the new book to the myLibrary array
@@ -51,7 +62,7 @@ Object.setPrototypeOf(BookInfo.prototype,Book.prototype);  //this sets BookInfo 
 function addBookToLibrary(){
     let bookStatus = getSelectedOption();
     let coverImage = selectImage();
-    let book = new BookInfo(bookTitle.value, bookAuthor.value, bookPages.value,bookStatus,coverImage);
+    let book = new Book(bookTitle.value, bookAuthor.value, bookPages.value,bookStatus,coverImage);
 
 
     myLibrary.push(book);
