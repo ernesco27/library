@@ -18,7 +18,7 @@ const errorField = document.querySelector('.error');
 inputs.forEach(input => input.addEventListener('input', (e)=>{
     if(input.validity.valid){
         errorField.textContent = '';
-        errorField.classList.add('error');
+        //errorField.classList.remove('error');
     }else{
         showError();
     }
@@ -195,6 +195,7 @@ function closeModal(){
 //         addBookToLibrary();
 // });
 add_btn.addEventListener('click', (e)=>{
+    e.preventDefault();
     let isValid = true;
 
     inputs.forEach(input =>{
@@ -206,8 +207,6 @@ add_btn.addEventListener('click', (e)=>{
 
     if(isValid){
         addBookToLibrary()
-    }else{
-        e.preventDefault();
     }
    
     

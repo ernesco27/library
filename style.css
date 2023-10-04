@@ -245,6 +245,7 @@ input:valid{
  
 }
 
+
 input:invalid{
     border-bottom: 2px solid #fd0004 ;
 }
