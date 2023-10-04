@@ -240,12 +240,12 @@ input{
     width: 22rem;
 }
 
-input.valid{
+input:valid{
     border-bottom: 2px solid greenyellow; 
  
 }
 
-input.invalid{
+input:invalid{
     border-bottom: 2px solid #fd0004 ;
 }
 

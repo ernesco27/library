@@ -14,54 +14,31 @@ const form = document.querySelector('form');
 const errorField = document.querySelector('.error');
 
 
-/*window.addEventListener('load', ()=>{
-inputs.forEach(input =>{
-    const isValid = input.value.length > 0;
-    input.className = isValid? 'valid' : 'invalid';
 
-})
-
-
-});
-*/
-
-inputs.forEach(input => input.addEventListener('input', ()=>{
-    
-    const isValid = input.value.length > 0;
-    if(isValid){
-        input.className = 'valid';
-        //errorField.textContent = '';
+inputs.forEach(input => input.addEventListener('input', (e)=>{
+    if(input.validity.valid){
+        errorField.textContent = '';
+        errorField.classList.add('error');
     }else{
-        input.className = 'invalid';
-        //errorField.textContent = 'this is a required field!'
+        showError();
     }
+    
 }));
 
-/*form.addEventListener('submit', (e)=>{
-    let isFormValid = true;
-    
-    for(let i = 0; i < inputs.length; i++){
-        const isValid = inputs[i].value.length > 0;
 
-        if(!isValid) {
-            inputs[i].className = 'invalid';
-            errorField.textContent = 'this is a required field';
-            isFormValid = false;
-        }
-            
-        // }else{
-        //     inputs[i].className = 'valid';
-        //     errorField.textContent = '';
-            
-        // }
-        if(!isFormValid){
-            e.preventDefault();
-        }
+
+function showError(){
+    inputs.forEach(input => {
+        if(input.validity.valueMissing){
+        errorField.textContent = 'Enter all required fields';
     }
-    //e.preventDefault();
 
-})
-*/
+    })
+    
+    
+    errorField.classList.add('error');
+}
+
 
 
 
@@ -214,39 +191,27 @@ function closeModal(){
 }
 
 //added event listeners to the various buttons
-add_btn.addEventListener('click', (e) =>{
-let isFormValid = true;
-//const errorField = document.querySelector('.error');
+// add_btn.addEventListener('click', (e) =>{
+//         addBookToLibrary();
+// });
+add_btn.addEventListener('click', (e)=>{
+    let isValid = true;
 
+    inputs.forEach(input =>{
+        if(!input.validity.valid){
+            showError();
+            isValid = false;
+        }
+    })
 
-    
-    for(let i = 0; i < inputs.length; i++){
-        const isValid = inputs[i].value.length > 0;
-
-        if(!isValid) {
-            inputs[i].className = 'invalid';
-            errorField.textContent = 'enter all required fields!';
-            console.log('enter all required fields!')
-            isFormValid = false;
-        
-            
-        }else{
-             inputs[i].className = 'valid';
-             errorField.textContent = '';
-            
-         }
-
-    }
-
-    if(!isFormValid){
-        e.preventDefault();
+    if(isValid){
+        addBookToLibrary()
     }else{
-        
-        addBookToLibrary();
+        e.preventDefault();
     }
-
-
-});
+   
+    
+})
 
 
 
