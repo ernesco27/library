@@ -72,31 +72,34 @@
             </div>
         </div>
     </div>
-    <form class="form-group">
+    <form class="form-group" novalidate>
         <div class="close-icon"><i class="fa-solid fa-circle-xmark"></i></div>
         <div class="form">
             <h3>Enter Book Details</h3>
-            <label for="title">Book Title:</label>
+            <label for="title">*Book Title:</label>
             <input type="text" id="title" name="title" placeholder="Romeo and Juliet" required>
+            
             <br>
-            <label for="author">Book Author:</label>
+            <label for="author">*Book Author:</label>
             <input type="text" id="author" name="author" placeholder="Shakespeare" required>
+            
             <br>
-            <label for="pages">Total Pages:</label>
+            <label for="pages">*Total Pages:</label>
             <input type="text" id="pages" name="pages" placeholder="250" required>
+            
             <br>
-            <h5>Have You Read The Book?</h5>
+            <h5>*Have You Read The Book?</h5>
             <div>
-                <input type="radio" id="read" name="status" value="read">
+                <input type="radio" id="read" name="status" value="read" required>
                 <label for="status">Read</label>
             </div>
             <div>
-                <input type="radio" id="unread" name="status" value="unread">
+                <input type="radio" id="unread" name="status" value="unread" required>
                 <label for="status">Unread</label>
             </div>
-            <button type="submit" class="add-btn"><span><i class="fa-solid fa-circle-plus"></i></span>ADD</button>
+            <button class="add-btn"><span><i class="fa-solid fa-circle-plus"></i></span>ADD</button>
         </div> 
-        <div class="error-message"></div>
+        <div class="error" aria-live="polite"></div>
     </form>
 </body>
 </html>

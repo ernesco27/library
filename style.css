@@ -234,10 +234,19 @@ body{
 input{
     padding:  0 10px;
     outline: none;
-    border-bottom: 2px solid red;
+    border-bottom: 2px solid black;
     border-top: none;
     border-right: none;
     width: 22rem;
+}
+
+input.valid{
+    border-bottom: 2px solid greenyellow; 
+ 
+}
+
+input.invalid{
+    border-bottom: 2px solid #fd0004 ;
 }
 
 #read, #unread{
@@ -260,7 +269,7 @@ input{
     transition: all 0.2s;
 }
 
-.error-message{
+.error{
     color: red;
     text-align: center;
     font-size: 0.8rem;

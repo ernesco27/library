@@ -9,6 +9,62 @@ const closeIcon = document.querySelector('.close-icon');
 const bookCard = document.querySelectorAll('.card');
 const inputs = document.querySelectorAll('input');
 
+//form validation
+const form = document.querySelector('form');
+const errorField = document.querySelector('.error');
+
+
+/*window.addEventListener('load', ()=>{
+inputs.forEach(input =>{
+    const isValid = input.value.length > 0;
+    input.className = isValid? 'valid' : 'invalid';
+
+})
+
+
+});
+*/
+
+inputs.forEach(input => input.addEventListener('input', ()=>{
+    
+    const isValid = input.value.length > 0;
+    if(isValid){
+        input.className = 'valid';
+        //errorField.textContent = '';
+    }else{
+        input.className = 'invalid';
+        //errorField.textContent = 'this is a required field!'
+    }
+}));
+
+/*form.addEventListener('submit', (e)=>{
+    let isFormValid = true;
+    
+    for(let i = 0; i < inputs.length; i++){
+        const isValid = inputs[i].value.length > 0;
+
+        if(!isValid) {
+            inputs[i].className = 'invalid';
+            errorField.textContent = 'this is a required field';
+            isFormValid = false;
+        }
+            
+        // }else{
+        //     inputs[i].className = 'valid';
+        //     errorField.textContent = '';
+            
+        // }
+        if(!isFormValid){
+            e.preventDefault();
+        }
+    }
+    //e.preventDefault();
+
+})
+*/
+
+
+
 
 
 function getSelectedOption(){
@@ -25,24 +81,6 @@ function getSelectedOption(){
 
 
 let myLibrary = [];
-
-
-// function Book(title,author){
-//     this.title = title,
-//     this.author = author
-// }
-
-// function BookInfo(title,author,pages,bookStatus,coverImage){
-//     Book.call(this,title,author);
-//     this.pages = pages,
-//     this.bookStatus = bookStatus,
-//     this.coverImage = coverImage
-// }
-
-
-
-// Object.setPrototypeOf(BookInfo.prototype,Book.prototype);  //this sets BookInfo object prototype to match Book prototype
-
 
 class Book{
     constructor(title,author,pages,bookStatus,coverImage){
@@ -176,7 +214,42 @@ function closeModal(){
 }
 
 //added event listeners to the various buttons
-add_btn.addEventListener('click', addBookToLibrary);
+add_btn.addEventListener('click', (e) =>{
+let isFormValid = true;
+//const errorField = document.querySelector('.error');
+
+
+    
+    for(let i = 0; i < inputs.length; i++){
+        const isValid = inputs[i].value.length > 0;
+
+        if(!isValid) {
+            inputs[i].className = 'invalid';
+            errorField.textContent = 'enter all required fields!';
+            console.log('enter all required fields!')
+            isFormValid = false;
+        
+            
+        }else{
+             inputs[i].className = 'valid';
+             errorField.textContent = '';
+            
+         }
+
+    }
+
+    if(!isFormValid){
+        e.preventDefault();
+    }else{
+        
+        addBookToLibrary();
+    }
+
+
+});
+
+
+
 closeIcon.addEventListener('click', closeModal);
 
 //this button displays the new book modal
