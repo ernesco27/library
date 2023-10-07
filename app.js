@@ -57,7 +57,11 @@ function getSelectedOption(){
 
 
 
-let myLibrary = [];
+//let myLibrary = [];
+// Initialize myLibrary array from local storage if available
+let myLibrary = JSON.parse(localStorage.getItem('myLibrary')) || [];
+
+
 
 class Book{
     constructor(title,author,pages,bookStatus,coverImage){
@@ -80,10 +84,30 @@ function addBookToLibrary(){
     let book = new Book(bookTitle.value, bookAuthor.value, bookPages.value,bookStatus,coverImage);
 
 
-    myLibrary.push(book);
+    myLibrary.unshift(book);
     displayBook();
-    closeModal();
+    closeFormModal();
+
+        // Save updated myLibrary to local storage
+    localStorage.setItem('myLibrary', JSON.stringify(myLibrary));
 }
+
+
+// Function to display books from local storage
+function displayBooksFromLocalStorage() {
+    const savedLibrary = JSON.parse(localStorage.getItem('myLibrary'));
+
+    if (savedLibrary && savedLibrary.length > 0) {
+        myLibrary = savedLibrary;
+        displayBook(); // Display the saved books
+    }else{
+        const emptyLibrary = document.createElement('div');
+        emptyLibrary.classList.add('empty');
+        emptyLibrary.innerHTML = '<i class="fa-solid fa-file-circle-plus"></i>'
+    }
+}
+
+displayBooksFromLocalStorage();
 
 
 
@@ -92,6 +116,7 @@ function displayBook(){
     card_container.textContent = '';
     let bookStatus = getSelectedOption();
     let coverImage = selectImage();
+
     
     //created a loop that iterates through the myLibrary array and displays the card for each book
     for(let i = 0; i < myLibrary.length; i++){ 
@@ -127,7 +152,11 @@ function displayBook(){
         iconDel.addEventListener('click', () =>{
             const bookToDelete = i
             myLibrary.splice(bookToDelete, 1);
+
+            // Update local storage with the modified library
+            localStorage.setItem('myLibrary', JSON.stringify(myLibrary));
             card.remove();
+
             }
         );
 
@@ -182,11 +211,28 @@ function displayBook(){
 
 
 //this function is to close the new book modal
-function closeModal(){
+function closeFormModal(){
+    
+    form_modal.style.animationName = 'modal-close';
+
     form_modal.style.display = 'none';
+
     bookTitle.value = '';
     bookAuthor.value = '';
     bookPages.value = '';
+
+}
+
+
+function openFormModal(){
+    form_modal.style.display = 'block';
+    form_modal.style.animationName = 'modal-open';
+    bookTitle.focus();
+
+    // form_modal.addEventListener('animationend', function () {
+    // form_modal.style.animationName = '';
+    // form_modal.removeEventListener('animationend', openFormModal);
+    // });
 
 }
 
@@ -214,14 +260,13 @@ add_btn.addEventListener('click', (e)=>{
 
 
 
-closeIcon.addEventListener('click', closeModal);
+closeIcon.addEventListener('click', closeFormModal);
 
 //this button displays the new book modal
-newBook_btn.addEventListener('click', () => {
-    form_modal.style.display = 'block';
-    bookTitle.focus();
+newBook_btn.addEventListener('click', openFormModal);
 
-});
+
+
 
 //function to select random images to upload
 
